@@ -8,7 +8,7 @@ namespace Amazon.Sender.S3
     public static class AWSUpload
     {
         private const string bucketName = "smart-fridge-pictures";                                  //The name of the S3 Bucket
-        private const string FilePath = "C:\\users\\bryan\\OneDrive\\Pictures\\testImage.jpg";      //Path of test image
+        private const string FilePath = @"..\..\..\..\images\testImage.jpg";                        //Path of test image
 
         public static readonly RegionEndpoint bucketRegion = RegionEndpoint.CACentral1;             //server region declaration
         
