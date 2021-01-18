@@ -8,13 +8,13 @@ namespace Amazon.Sender.S3
     public static class AWSUpload
     {
         private const string bucketName = "smart-fridge-pictures";                                  //The name of the S3 Bucket
-        private const string FilePath = @"..\..\..\..\images\testImage.jpg";                        //Path of test image
+        private const string FilePath = @"..\..\..\..\images\testimage-2.jpg";                        //Path of test image
 
         public static readonly RegionEndpoint bucketRegion = RegionEndpoint.CACentral1;             //server region declaration
         
         //Instantiating S3 Client
         private static IAmazonS3 s3Client =
-                new AmazonS3Client("AKIAR3MU7FCEBCLNKSMR", "rt8/KgypLhIUGrGSVRk/0yuctQwu8XmW2YmEx0Me", bucketRegion);
+                new AmazonS3Client(bucketRegion);
 
         public static async Task UploadingFileAsync()                                               //Method to upload files to S3 bucket
         {
