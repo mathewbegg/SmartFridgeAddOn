@@ -6,7 +6,7 @@ namespace ImageCaptureSystem
     public class ImageCapture
     {
         private FrameSource _source;
-        private const string FilePath = @"..\..\..\..\images\testimage-2.jpg";
+        private const string FilePath = @"..\..\..\..\images\FridgePicture.jpg";
 
         public void Initialize()
         {
