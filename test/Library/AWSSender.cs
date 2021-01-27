@@ -7,10 +7,10 @@ namespace Amazon.Sender.S3
 {
     public static class AWSUpload
     {
-        private const string bucketName = "smart-fridge-pictures";                                  //The name of the S3 Bucket
+        private const string bucketName = "smart-fridge-pictures-2";                                  //The name of the S3 Bucket
         private const string FilePath = @"..\..\..\..\images\testimage-2.jpg";                        //Path of test image
 
-        public static readonly RegionEndpoint bucketRegion = RegionEndpoint.CACentral1;             //server region declaration
+        public static readonly RegionEndpoint bucketRegion = RegionEndpoint.USEast1;             //server region declaration
         
         //Instantiating S3 Client
         private static IAmazonS3 s3Client =
@@ -20,6 +20,7 @@ namespace Amazon.Sender.S3
         {
             try
             {
+                Console.WriteLine("Sending image to server ...");
                 var fileTransferUtility = new TransferUtility(s3Client);
 
                 await fileTransferUtility.UploadAsync(FilePath, bucketName);

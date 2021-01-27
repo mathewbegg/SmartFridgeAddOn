@@ -7,6 +7,8 @@
 
   <ItemGroup>
     <PackageReference Include="AWSSDK.S3" Version="3.5.7.6" />
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.11" />
+    <PackageReference Include="OpenCvSharp4.Windows" Version="4.5.1.20210123" />
   </ItemGroup>
 
 </Project>
