@@ -3,7 +3,7 @@ const rekognition = new aws.Rekognition();
 const docClient = new aws.DynamoDB.DocumentClient();
 
 const BUCKET_NAME = 'smart-fridge-pictures';
-const PICTURE_NAME = 'test-picture.png';
+const PICTURE_NAME = 'FridgePicture.jpg';
 const TABLE_NAME = 'SmartFridgeData';
 
 exports.handler = async (event) => {
