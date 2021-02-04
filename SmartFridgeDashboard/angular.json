@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "SmartFridgeDashboard"
+  "defaultProject": "SmartFridgeDashboard",
+  "cli": {
+    "analytics": "e530e863-62af-48bb-816e-f6d9139df716"
+  }
 }
