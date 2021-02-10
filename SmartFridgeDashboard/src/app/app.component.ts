@@ -17,10 +17,13 @@ export class AppComponent {
 
   constructor(private cdr: ChangeDetectorRef) {}
 
+  identityId = null;
+
   ngOnInit() {
-    onAuthUIStateChange((authSate, authData) => {
+    onAuthUIStateChange((authSate, authData: CognitoUserInterface) => {
       this.authState = authSate;
       this.user = authData as CognitoUserInterface;
+      this.identityId = 'us-east-1:' + authData?.attributes?.sub;
       this.cdr.detectChanges();
     });
   }

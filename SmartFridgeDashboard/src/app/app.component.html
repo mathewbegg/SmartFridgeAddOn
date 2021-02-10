@@ -1,7 +1,6 @@
 <amplify-authenticator *ngIf="authState !== 'signedin'"></amplify-authenticator>
 
-<div *ngIf="authState === 'signedin' && user" class="App">
+<div *ngIf="authState === 'signedin' && user" class="content">
   <amplify-sign-out></amplify-sign-out>
-  <div>Hello, {{ user.username }}</div>
-  <!-- This is where you application template code goes -->
+  <amplify-s3-image img-key="FridgePicture.jpg"></amplify-s3-image>
 </div>
