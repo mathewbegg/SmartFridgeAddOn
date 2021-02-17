@@ -6,6 +6,12 @@ import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 import Amplify, { Storage } from 'aws-amplify';
 import awsconfig from '../aws-exports';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+
 //https://docs.amplify.aws/lib/storage/getting-started/q/platform/js#manual-setup-import-storage-bucket
 Amplify.configure({
   Auth: {
@@ -31,7 +37,15 @@ https: Storage.configure({
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AmplifyUIAngularModule],
+  imports: [
+    BrowserModule,
+    AmplifyUIAngularModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

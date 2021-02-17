@@ -1,6 +1,11 @@
+<mat-toolbar color="primary"
+  ><button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button></mat-toolbar
+>
+<mat-menu #menu="matMenu"> <amplify-sign-out></amplify-sign-out></mat-menu>
 <amplify-authenticator *ngIf="authState !== 'signedin'"></amplify-authenticator>
 
 <div *ngIf="authState === 'signedin' && user" class="content">
-  <amplify-sign-out></amplify-sign-out>
   <amplify-s3-image img-key="FridgePicture.jpg"></amplify-s3-image>
 </div>
