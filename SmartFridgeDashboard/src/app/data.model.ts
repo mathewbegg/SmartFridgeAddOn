@@ -1,10 +1,10 @@
 export interface FridgeDataModel {
-  Data: FridgeItem[];
+  Items: FridgeItem[];
 }
 
 export interface FridgeItem {
   Name: string;
-  instances: FridgeItemInstance;
+  Instances: FridgeItemInstance;
 }
 
 export interface FridgeItemInstance {

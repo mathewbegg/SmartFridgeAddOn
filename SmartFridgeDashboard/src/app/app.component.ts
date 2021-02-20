@@ -4,7 +4,7 @@ import {
   CognitoUserInterface,
   AuthState,
 } from '@aws-amplify/ui-components';
-import { DataService } from './data.service';
+import { FridgeDataModel, FridgeItem } from './data.model';
 
 @Component({
   selector: 'app-root',
@@ -16,13 +16,9 @@ export class AppComponent {
   user: CognitoUserInterface | undefined;
   authState: AuthState;
 
-  constructor(
-    private cdr: ChangeDetectorRef,
-    private dataService: DataService
-  ) {}
+  constructor(private cdr: ChangeDetectorRef) {}
 
   identityId = null;
-  data: any;
 
   ngOnInit() {
     onAuthUIStateChange((authSate, authData: CognitoUserInterface) => {
@@ -30,10 +26,6 @@ export class AppComponent {
       this.user = authData as CognitoUserInterface;
       this.identityId = 'us-east-1:' + authData?.attributes?.sub;
       this.cdr.detectChanges();
-    });
-
-    this.dataService.getItems().subscribe((data) => {
-      this.data = data;
     });
   }
 
