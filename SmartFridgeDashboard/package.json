@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "build-prod": "ng build --prod",
     "test": "ng test",
@@ -24,7 +24,7 @@
     "@angular/router": "~11.0.5",
     "@aws-amplify/ui-angular": "^0.4.20",
     "aws-amplify": "^3.3.17",
-    "rxjs": "~6.6.0",
+    "rxjs": "^6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
