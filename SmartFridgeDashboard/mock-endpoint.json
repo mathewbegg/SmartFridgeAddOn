@@ -28,6 +28,94 @@
             "top": 0.15
           }
         ]
+      },
+      {
+        "Name": "Milk",
+        "Instances": [
+          {
+            "height": 0.25,
+            "left": 0.76,
+            "width": 0.68,
+            "top": 0.15
+          }
+        ]
+      },
+      {
+        "Name": "Orange Juice",
+        "Instances": [
+          {
+            "height": 0.25,
+            "left": 0.76,
+            "width": 0.68,
+            "top": 0.15
+          }
+        ]
+      },
+      {
+        "Name": "Ketchup",
+        "Instances": [
+          {
+            "height": 0.25,
+            "left": 0.76,
+            "width": 0.68,
+            "top": 0.15
+          }
+        ]
+      },
+      {
+        "Name": "Chicken",
+        "Instances": [
+          {
+            "height": 0.25,
+            "left": 0.76,
+            "width": 0.68,
+            "top": 0.15
+          }
+        ]
+      },
+      {
+        "Name": "Egg",
+        "Instances": [
+          {
+            "height": 0.25,
+            "left": 0.76,
+            "width": 0.68,
+            "top": 0.15
+          }
+        ]
+      },
+      {
+        "Name": "Pancake",
+        "Instances": [
+          {
+            "height": 0.25,
+            "left": 0.76,
+            "width": 0.68,
+            "top": 0.15
+          }
+        ]
+      },
+      {
+        "Name": "Pepperoni",
+        "Instances": [
+          {
+            "height": 0.25,
+            "left": 0.76,
+            "width": 0.68,
+            "top": 0.15
+          }
+        ]
+      },
+      {
+        "Name": "Cheese",
+        "Instances": [
+          {
+            "height": 0.25,
+            "left": 0.76,
+            "width": 0.68,
+            "top": 0.15
+          }
+        ]
       }
     ]
   }

@@ -1,6 +1,11 @@
 <mat-form-field>
   <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input />
+  <input
+    matInput
+    (keyup)="applyFilter($event)"
+    placeholder="Ex. Apple"
+    #input
+  />
 </mat-form-field>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -21,8 +26,6 @@
 
   <!-- Row shown when there is no matching data. -->
   <tr class="mat-row" *matNoDataRow>
-    <td class="mat-cell" colspan="4">
-      No data matching the filter "{{ input.value }}"
-    </td>
+    <td class="mat-cell" colspan="4">No matches"</td>
   </tr>
 </table>
