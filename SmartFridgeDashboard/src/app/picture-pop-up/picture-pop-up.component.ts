@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FridgeItemInstance } from '../data.model';
 
 const IMG_WIDTH = 640;

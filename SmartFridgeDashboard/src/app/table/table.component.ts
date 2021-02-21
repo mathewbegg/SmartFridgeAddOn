@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
   MatTableDataSource,
   _MatTableDataSource,
 } from '@angular/material/table';
-import { FridgeDataModel, FridgeItem, FridgeItemInstance } from '../data.model';
+import { FridgeDataModel, FridgeItem } from '../data.model';
 import { DataService } from '../data.service';
 import { PicturePopUpComponent } from '../picture-pop-up/picture-pop-up.component';
 

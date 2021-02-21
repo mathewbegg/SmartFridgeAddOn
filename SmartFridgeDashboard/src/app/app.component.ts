@@ -1,10 +1,11 @@
 import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import {
   onAuthUIStateChange,
   CognitoUserInterface,
   AuthState,
 } from '@aws-amplify/ui-components';
-import { FridgeDataModel, FridgeItem } from './data.model';
+import { PicturePopUpComponent } from './picture-pop-up/picture-pop-up.component';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,11 @@ export class AppComponent {
   user: CognitoUserInterface | undefined;
   authState: AuthState;
 
-  constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private ngZone: NgZone,
+    public dialog: MatDialog
+  ) {}
 
   identityId = null;
 
@@ -31,5 +36,9 @@ export class AppComponent {
 
   ngOnDestroy() {
     return onAuthUIStateChange;
+  }
+
+  expandPicture() {
+    this.dialog.open(PicturePopUpComponent, null);
   }
 }
