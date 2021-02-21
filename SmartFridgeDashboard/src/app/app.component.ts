@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
 import {
   onAuthUIStateChange,
   CognitoUserInterface,
@@ -16,7 +16,7 @@ export class AppComponent {
   user: CognitoUserInterface | undefined;
   authState: AuthState;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) {}
 
   identityId = null;
 
@@ -25,7 +25,7 @@ export class AppComponent {
       this.authState = authSate;
       this.user = authData as CognitoUserInterface;
       this.identityId = 'us-east-1:' + authData?.attributes?.sub;
-      this.cdr.detectChanges();
+      this.ngZone.run(() => this.cdr.detectChanges()); //https://github.com/aws-amplify/docs/issues/2031
     });
   }
 

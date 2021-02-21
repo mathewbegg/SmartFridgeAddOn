@@ -15,6 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { TableComponent } from './table/table.component';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PicturePopUpComponent } from './picture-pop-up/picture-pop-up.component';
 
 //https://docs.amplify.aws/lib/storage/getting-started/q/platform/js#manual-setup-import-storage-bucket
 Amplify.configure({
@@ -40,7 +42,7 @@ https: Storage.configure({
 });
 
 @NgModule({
-  declarations: [AppComponent, TableComponent],
+  declarations: [AppComponent, TableComponent, PicturePopUpComponent],
   imports: [
     BrowserModule,
     AmplifyUIAngularModule,
@@ -52,6 +54,7 @@ https: Storage.configure({
     MatIconModule,
     MatTableModule,
     MatInputModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
