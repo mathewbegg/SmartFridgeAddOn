@@ -1,13 +1,10 @@
 .pop-up-container {
   position: relative;
+  overflow: hidden;
 }
 
 .coordinate-box {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 10px;
-  height: 10px;
   border: 2px solid red;
 }
 
