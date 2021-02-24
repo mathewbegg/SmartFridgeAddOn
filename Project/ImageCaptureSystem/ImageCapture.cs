@@ -7,6 +7,7 @@ namespace ImageCaptureSystem
     {
         private FrameSource _source;
         private const string FilePath = @"..\..\..\..\images\FridgePicture.jpg";
+        public Mat _image = new Mat();
 
         public void Initialize()
         {
@@ -15,18 +16,15 @@ namespace ImageCaptureSystem
 
         }
 
-        public void CaptureImage()
+        public Mat CaptureImage()
         {
-
-            using var image = new Mat();            //Create a Mat object
 
             try
             {
-                Console.WriteLine("Capturing image ...");
-                _source.NextFrame(image);           //Grab screenshot from webcam
-                image.SaveImage(FilePath);     //Save screenshot to file destination
-                image.Dispose();                      //Release the Matrix resources
-                Console.WriteLine("Image captured!");
+                _source.NextFrame(_image); //Grab screenshot from webcam
+                _image.SaveImage(FilePath); //Save screenshot to file destination
+                //image.Dispose();                      //Release the Matrix resources
+                return _image;
 
             }
             catch (Exception e)
@@ -40,4 +38,3 @@ namespace ImageCaptureSystem
         }
     }
 }
-
