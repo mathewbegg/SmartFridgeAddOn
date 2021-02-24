@@ -1,0 +1,14 @@
+.pop-up-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.coordinate-box {
+  position: absolute;
+  border: 2px solid red;
+}
+
+amplify-s3-image {
+  --width: 640px;
+  --height: 480px;
+}

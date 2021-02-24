@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: '/api', //TODO replace this with prod URL
 };

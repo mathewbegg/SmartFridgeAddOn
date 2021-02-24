@@ -1,7 +1,17 @@
+<mat-toolbar color="primary"
+  ><button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button></mat-toolbar
+>
+<mat-menu #menu="matMenu"> <amplify-sign-out></amplify-sign-out></mat-menu>
 <amplify-authenticator *ngIf="authState !== 'signedin'"></amplify-authenticator>
 
-<div *ngIf="authState === 'signedin' && user" class="App">
-  <amplify-sign-out></amplify-sign-out>
-  <div>Hello, {{ user.username }}</div>
-  <!-- This is where you application template code goes -->
+<div class="content" *ngIf="authState === 'signedin' && user">
+  <h1>What's In My Fridge?</h1>
+  <amplify-s3-image
+    class="small-image"
+    img-key="FridgePicture.jpg"
+    (click)="expandPicture()"
+  ></amplify-s3-image>
+  <sfd-table></sfd-table>
 </div>

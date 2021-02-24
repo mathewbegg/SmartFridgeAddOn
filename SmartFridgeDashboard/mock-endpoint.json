@@ -1,0 +1,122 @@
+{
+  "Data": {
+    "Items": [
+      {
+        "Name": "Apple",
+        "Instances": [
+          {
+            "top": 0.1,
+            "left": 0.1,
+            "width": 0.25,
+            "height": 0.25
+          },
+          {
+            "top": 0.5,
+            "left": 0.5,
+            "width": 0.45,
+            "height": 0.45
+          }
+        ]
+      },
+      {
+        "Name": "Mustard",
+        "Instances": [
+          {
+            "height": 0.25,
+            "left": 0.25,
+            "width": 0.10,
+            "top": 0.10
+          }
+        ]
+      },
+      {
+        "Name": "Milk",
+        "Instances": [
+          {
+            "height": 0.25,
+            "left": 0.25,
+            "width": 0.10,
+            "top": 0.10
+          }
+        ]
+      },
+      {
+        "Name": "Orange Juice",
+        "Instances": [
+          {
+            "height": 0.25,
+            "left": 0.25,
+            "width": 0.10,
+            "top": 0.10
+          }
+        ]
+      },
+      {
+        "Name": "Ketchup",
+        "Instances": [
+          {
+            "height": 0.25,
+            "left": 0.25,
+            "width": 0.10,
+            "top": 0.10
+          }
+        ]
+      },
+      {
+        "Name": "Chicken",
+        "Instances": [
+          {
+            "height": 0.25,
+            "left": 0.25,
+            "width": 0.10,
+            "top": 0.10
+          }
+        ]
+      },
+      {
+        "Name": "Egg",
+        "Instances": [
+          {
+            "height": 0.25,
+            "left": 0.25,
+            "width": 0.10,
+            "top": 0.10
+          }
+        ]
+      },
+      {
+        "Name": "Pancake",
+        "Instances": [
+          {
+            "height": 0.25,
+            "left": 0.25,
+            "width": 0.10,
+            "top": 0.10
+          }
+        ]
+      },
+      {
+        "Name": "Pepperoni",
+        "Instances": [
+          {
+            "height": 0.25,
+            "left": 0.25,
+            "width": 0.10,
+            "top": 0.10
+          }
+        ]
+      },
+      {
+        "Name": "Cheese",
+        "Instances": [
+          {
+            "height": 0.25,
+            "left": 0.25,
+            "width": 0.10,
+            "top": 0.10
+          }
+        ]
+      }
+    ]
+  }
+}

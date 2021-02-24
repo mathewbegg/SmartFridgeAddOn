@@ -1,0 +1,13 @@
+.mat-cell {
+  padding: 12px 24px;
+}
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+.mat-row {
+  cursor: pointer;
+  &:hover {
+    background-color: lightgrey;
+  }
+}
