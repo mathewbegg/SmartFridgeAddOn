@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1080">
+        Title="Smart Fridge Add-On" Height="720" Width="1080">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="11*"/>
@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
         <TextBlock Text="Smart Fridge Add-On" TextWrapping="Wrap" Grid.Row="0" Margin="0,46,0,0" FontSize="18" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="24" Width="172"/>
         <TextBlock Name="Success" Text="Image Uploaded!" Visibility="Hidden" Grid.Row="3" Grid.Column="2" Foreground="#4BB543" FontSize="14" HorizontalAlignment="Left" Margin="117,57,0,20" Width="106"/>
-        <TextBlock Name="Failure" Text="Upload Failed." Visibility="Hidden" Grid.Row="3" Grid.Column="2" Foreground="#FF0033" FontSize="14" HorizontalAlignment="Left" Margin="125,57,0,-32" Width="90"/>
+        <TextBlock Name="Failure" Text="Upload Cancelled." Visibility="Hidden" Grid.Row="3" Grid.Column="2" Foreground="#FF0033" FontSize="14" HorizontalAlignment="Left" Margin="117,57,0,-32" Width="115"/>
         <Image Name="ImageViewer1" Margin="220,91,220,19" Grid.RowSpan="3" Grid.ColumnSpan="4" MaxWidth="640" MaxHeight="479"/>
         <Image Name="ImageViewer2" Margin="220,91,220,19" Grid.RowSpan="3" Grid.ColumnSpan="4" MaxWidth="640" MaxHeight="479"/>
         <Button x:Name="CaptureImageButton" Content="Capture Image" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" RenderTransformOrigin="0.513,0.64" Width="110" FontSize="14" Height="28" Click="CaptureImageButton_Click" Margin="17,24,0,0"/>
