@@ -4,14 +4,17 @@
   </button></mat-toolbar
 >
 <mat-menu #menu="matMenu"> <amplify-sign-out></amplify-sign-out></mat-menu>
-<amplify-authenticator *ngIf="authState !== 'signedin'"></amplify-authenticator>
+<amplify-authenticator *ngIf="authState !== 'signedin'"
+  ><amplify-sign-in slot="sign-in" hideSignUp></amplify-sign-in
+></amplify-authenticator>
 
 <div class="content" *ngIf="authState === 'signedin' && user">
   <h1>What's In My Fridge?</h1>
-  <amplify-s3-image
-    class="small-image"
-    img-key="FridgePicture.jpg"
-    (click)="expandPicture()"
-  ></amplify-s3-image>
-  <sfd-table></sfd-table>
+  <div class="sub-content">
+    <amplify-s3-image
+      img-key="FridgePicture.jpg"
+      (click)="expandPicture()"
+    ></amplify-s3-image>
+    <sfd-table></sfd-table>
+  </div>
 </div>

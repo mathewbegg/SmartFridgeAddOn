@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: '/api', //TODO replace this with prod URL
+  apiUrl: 'https://pfw1gogzza.execute-api.us-east-1.amazonaws.com/test/product',
 };

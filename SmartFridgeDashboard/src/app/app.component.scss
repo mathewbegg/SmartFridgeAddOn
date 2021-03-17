@@ -1,13 +1,45 @@
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  * {
-    margin: 10px 0;
+$breakpoint: 1199px;
+
+//Desktop
+@media (min-width: $breakpoint) {
+  .sub-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  amplify-s3-image {
+    --width: 50vw;
+    cursor: pointer;
   }
 }
 
-amplify-s3-image.small-image {
-  --height: 200px;
-  cursor: pointer;
+//Mobile
+@media (max-width: $breakpoint) {
+  .sub-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  amplify-s3-image {
+    --height: 60vw;
+    cursor: pointer;
+  }
+}
+
+.sub-content {
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  * {
+    margin: 10px 0;
+  }
 }

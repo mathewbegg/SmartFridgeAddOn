@@ -24,9 +24,10 @@ namespace GUI
 
         private async void CaptureImageButton_Click(object sender, RoutedEventArgs e)
         {
+
             Success.Visibility = Visibility.Hidden;                                                     // Changing supplementary text visibility
             Failure.Visibility = Visibility.Hidden;                                                     // Changing supplementary text visibility
-           
+
             var image = await ImageSender.CaptureImage();                                           // Capturing image, return image matrix
 
             if (DisplayImage(image) == 0)                                                              // Displaying image to main window of application

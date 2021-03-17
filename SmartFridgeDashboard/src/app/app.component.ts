@@ -5,6 +5,7 @@ import {
   CognitoUserInterface,
   AuthState,
 } from '@aws-amplify/ui-components';
+import { DataService } from './data.service';
 import { PicturePopUpComponent } from './picture-pop-up/picture-pop-up.component';
 
 @Component({
@@ -14,21 +15,28 @@ import { PicturePopUpComponent } from './picture-pop-up/picture-pop-up.component
 })
 export class AppComponent {
   title = 'SmartFridgeDashboard';
-  user: CognitoUserInterface | undefined;
+  user: CognitoUserInterface;
   authState: AuthState;
 
   constructor(
     private cdr: ChangeDetectorRef,
     private ngZone: NgZone,
+    private dataService: DataService,
     public dialog: MatDialog
   ) {}
 
   identityId = null;
 
   ngOnInit() {
-    onAuthUIStateChange((authSate, authData: CognitoUserInterface) => {
-      this.authState = authSate;
-      this.user = authData as CognitoUserInterface;
+    this.dataService.user.subscribe((user) => {
+      this.user = user;
+    });
+    this.dataService.authState.subscribe((authState) => {
+      this.authState = authState;
+    });
+    onAuthUIStateChange((authState, authData: CognitoUserInterface) => {
+      this.dataService.setAuthState(authState);
+      this.dataService.setUser(authData as CognitoUserInterface);
       this.identityId = 'us-east-1:' + authData?.attributes?.sub;
       this.ngZone.run(() => this.cdr.detectChanges()); //https://github.com/aws-amplify/docs/issues/2031
     });
