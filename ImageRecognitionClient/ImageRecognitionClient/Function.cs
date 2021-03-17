@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.S3Events;
@@ -84,10 +87,11 @@ namespace ImageRecognitionClient
             //get image analysis
             var client = new V2.V2Client(ClarifaiChannel.Grpc());
 
-
-            var metadata = new Metadata
+            context.Logger.LogLine("Initializing clarifai metadata");
+            context.Logger.LogLine(Environment.GetEnvironmentVariable("Clarifai_Key"));
+            var metadata = new Metadata()
             {
-                {"Authorization", Environment.GetEnvironmentVariable("Clarifai_Key")}
+                {"Authorization", "Key " + Environment.GetEnvironmentVariable("Clarifai_Key")}
             };
 
             context.Logger.LogLine("Clarifai post");
@@ -119,14 +123,17 @@ namespace ImageRecognitionClient
                 context.Logger.LogLine("Request failed, response: " + irsResponse);
                 throw new Exception("Request failed, response: " + irsResponse);
             }
+
             //store image analysis
+            var labels = irsResponse.Outputs[0].Data.Concepts
+                .Select(label
+                    => new Label {Name = label.Name, Confidence = label.Value}).ToList();
 
-            var str = irsResponse.Outputs[0].Data.Concepts.Aggregate("Predicted concepts:\n", (current, concept) => current + String.Format($"{concept.Name,15} {concept.Value:0.00}\n"));
-            
-            var fileStream = new MemoryStream();
-            new StreamWriter(fileStream).WriteLine(str);
+            var str = JsonSerializer.Serialize(labels);
 
-            var status =  await S3Client.PutObjectAsync(new PutObjectRequest()
+            var fileStream = new MemoryStream(Encoding.UTF8.GetBytes(str));
+
+            var status = await S3Client.PutObjectAsync(new PutObjectRequest()
             {
                 BucketName = "fridgedata-s3",
                 Key = "FridgeContents.json",
@@ -137,8 +144,15 @@ namespace ImageRecognitionClient
                 context.Logger.LogLine("Request failed, response: " + status);
                 throw new Exception("Request failed, response: " + status);
             }
+
             context.Logger.LogLine(str);
             return str;
         }
+    }
+
+    public class Label
+    {
+        public string Name { get; set; }
+        public float Confidence { get; set; }
     }
 }
