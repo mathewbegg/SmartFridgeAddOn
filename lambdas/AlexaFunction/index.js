@@ -66,7 +66,31 @@ const ListIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            .reprompt()
+            .getResponse();
+    }
+};
+
+const ItemQueryIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ItemQueryIntent';
+    },
+    async handle(handlerInput) {
+        
+        const productName = handlerInput.requestEnvelope.request.intent.slots.ProductName.value;
+        const result = await invokeLambda({ProductName: productName});
+
+        if (result.found) {
+          speakOutput = 'Your fridge contains ' + productName;
+        }
+        else {
+          speakOutput = 'I cannot find ' + productName + ' in your fridge';
+        }
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt()
             .getResponse();
     }
 };
@@ -182,6 +206,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         ListIntentHandler,
+        ItemQueryIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         FallbackIntentHandler,
