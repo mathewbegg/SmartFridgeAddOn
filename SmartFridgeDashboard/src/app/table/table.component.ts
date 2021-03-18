@@ -8,13 +8,6 @@ import { FridgeDataModel, FridgeItem } from '../data.model';
 import { DataService } from '../data.service';
 import { PicturePopUpComponent } from '../picture-pop-up/picture-pop-up.component';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
 @Component({
   selector: 'sfd-table',
   templateUrl: './table.component.html',
@@ -24,7 +17,7 @@ export class TableComponent implements OnInit {
   constructor(private dataService: DataService, public dialog: MatDialog) {}
 
   data: FridgeDataModel;
-  displayedColumns: string[] = ['Name', 'Amount'];
+  displayedColumns: string[] = ['Name'];
   dataSource = new MatTableDataSource<FridgeItem>([]);
   popUpRef: MatDialogRef<PicturePopUpComponent>;
 
