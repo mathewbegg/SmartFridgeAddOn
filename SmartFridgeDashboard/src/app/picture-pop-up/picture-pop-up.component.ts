@@ -6,7 +6,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FridgeItemInstance } from '../data.model';
 
 const DEFAULT_IMG_WIDTH = 640;
 const DEFAULT_IMG_HEIGHT = 480;
@@ -17,7 +16,7 @@ const DEFAULT_IMG_HEIGHT = 480;
   styleUrls: ['./picture-pop-up.component.scss'],
 })
 export class PicturePopUpComponent implements OnInit {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: FridgeItemInstance[]) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
 
   @ViewChild('popUpContainer') popUpContainer: ElementRef;
   imgWidgth = DEFAULT_IMG_WIDTH;

@@ -4,12 +4,6 @@ export interface FridgeDataModel {
 
 export interface FridgeItem {
   Name: string;
-  Instances: FridgeItemInstance;
-}
-
-export interface FridgeItemInstance {
-  top: number;
-  left: number;
-  height: number;
-  width: number;
+  Confidence: number;
+  color?: string;
 }

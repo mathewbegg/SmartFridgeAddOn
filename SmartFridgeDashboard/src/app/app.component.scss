@@ -6,11 +6,11 @@ $breakpoint: 1199px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 
   amplify-s3-image {
-    --width: 50vw;
+    --height: 80vh;
     cursor: pointer;
   }
 }
