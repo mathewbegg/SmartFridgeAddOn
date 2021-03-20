@@ -1,0 +1,91 @@
+{
+  "Data": {
+    "statusCode": 200,
+    "body": [
+      {
+        "Name": "0",
+        "Confidence": 0
+      },
+      {
+        "Name": "0.05",
+        "Confidence": 0.05
+      },
+      {
+        "Name": "0.10",
+        "Confidence": 0.1
+      },
+      {
+        "Name": "0.15",
+        "Confidence": 0.15
+      },
+      {
+        "Name": "0.20",
+        "Confidence": 0.2
+      },
+      {
+        "Name": "0.25",
+        "Confidence": 0.25
+      },
+      {
+        "Name": "0.30",
+        "Confidence": 0.3
+      },
+      {
+        "Name": "0.35",
+        "Confidence": 0.35
+      },
+      {
+        "Name": "0.40",
+        "Confidence": 0.4
+      },
+      {
+        "Name": "0.45",
+        "Confidence": 0.45
+      },
+      {
+        "Name": "0.50",
+        "Confidence": 0.5
+      },
+      {
+        "Name": "0.55",
+        "Confidence": 0.55
+      },
+      {
+        "Name": "0.60",
+        "Confidence": 0.6
+      },
+      {
+        "Name": "0.65",
+        "Confidence": 0.65
+      },
+      {
+        "Name": "0.70",
+        "Confidence": 0.7
+      },
+      {
+        "Name": "0.75",
+        "Confidence": 0.75
+      },
+      {
+        "Name": "0.80",
+        "Confidence": 0.8
+      },
+      {
+        "Name": "0.85",
+        "Confidence": 0.85
+      },
+      {
+        "Name": "0.90",
+        "Confidence": 0.9
+      },
+      {
+        "Name": "0.95",
+        "Confidence": 0.95
+      },
+      {
+        "Name": "1",
+        "Confidence": 1
+      }
+    ]
+  }
+}

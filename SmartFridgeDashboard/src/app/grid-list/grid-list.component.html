@@ -1,0 +1,14 @@
+<mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter()"
+      [(ngModel)]="filterString"
+      placeholder="Ex. Apple"
+    />
+  </mat-form-field>
+<div class="grid-container">
+    <div class="sfd-tile" *ngFor="let item of displayItems" [style.background-color]="getShade(item.Confidence)">
+        <div>{{item.Name}}</div>
+    </div>
+</div>

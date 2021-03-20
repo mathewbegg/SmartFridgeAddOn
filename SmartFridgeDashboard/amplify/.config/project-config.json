@@ -1,17 +1,17 @@
 {
+  "providers": [
+    "awscloudformation"
+  ],
   "projectName": "SmartFridgeDashboard",
-  "version": "3.0",
+  "version": "3.1",
   "frontend": "javascript",
   "javascript": {
     "framework": "angular",
     "config": {
       "SourceDir": "src",
       "DistributionDir": "dist/SmartFridgeDashboard",
-      "BuildCommand": "npm.cmd run-script build",
-      "StartCommand": "ng serve"
+      "BuildCommand": "npm run build-prod",
+      "StartCommand": "npm start"
     }
-  },
-  "providers": [
-    "awscloudformation"
-  ]
+  }
 }

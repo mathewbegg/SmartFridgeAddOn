@@ -8,15 +8,19 @@ import Amplify, { Storage } from 'aws-amplify';
 import awsconfig from '../aws-exports';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { TableComponent } from './table/table.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatGridListModule } from '@angular/material/grid-list';
+
 import { PicturePopUpComponent } from './picture-pop-up/picture-pop-up.component';
+import { GridListComponent } from './grid-list/grid-list.component';
 
 //https://docs.amplify.aws/lib/storage/getting-started/q/platform/js#manual-setup-import-storage-bucket
 Amplify.configure({
@@ -42,12 +46,13 @@ https: Storage.configure({
 });
 
 @NgModule({
-  declarations: [AppComponent, TableComponent, PicturePopUpComponent],
+  declarations: [AppComponent, PicturePopUpComponent, GridListComponent],
   imports: [
     BrowserModule,
     AmplifyUIAngularModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FormsModule,
     MatToolbarModule,
     MatButtonModule,
     MatMenuModule,
@@ -55,6 +60,7 @@ https: Storage.configure({
     MatTableModule,
     MatInputModule,
     MatDialogModule,
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
