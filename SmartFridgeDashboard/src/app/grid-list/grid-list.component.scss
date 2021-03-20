@@ -18,14 +18,14 @@
   width: 100px;
   height: 100px;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-wrap: wrap;
   cursor: pointer;
   user-select: none;
   &:hover {
     border: 1px solid #673ab7;
     box-sizing: border-box;
-  }
-
-  .tile-label {
-    margin: auto;
   }
 }
