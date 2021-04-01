@@ -63,7 +63,7 @@ def lambda_handler(event, context):
             'statusCode': 200,
             'body': products
         }
-    else:    
+    else:      
         return {
             'statusCode': 200,
             'body': response
