@@ -19,5 +19,6 @@
     "package-type"         : "Zip",
     "function-role"        : "arn:aws:iam::127550826632:role/service-role/trigger_IRS_on_S3_upload-role-qf6m701x",
     "tracing-mode"         : "Active",
-    "image-tag"             : ""
+    "image-tag"            : "",
+    "environment-variables" : "\"Clarifai_Model_Id\"=\"9504135848be0dd2c39bdab0002f78e9\""
 }

@@ -98,7 +98,7 @@ namespace ImageRecognitionClient
             var irsResponse = client.PostModelOutputs(
                 new PostModelOutputsRequest()
                 {
-                    ModelId = "9504135848be0dd2c39bdab0002f78e9",
+                    ModelId = Environment.GetEnvironmentVariable("Clarifai_Model_Id"),
                     Inputs =
                     {
                         new List<Input>()
