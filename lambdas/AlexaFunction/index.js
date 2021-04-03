@@ -6,28 +6,28 @@
 const Alexa = require('ask-sdk-core');
 const AWS = require('aws-sdk');
 const lambda = new AWS.Lambda();
+var remainingFridgeContent = '';
 
 //Returns a promise of the resolve of the invocation of the test123get lambda function
 function invokeLambda(Payload = {}) {
-  return new Promise(((resolve, reject) => {
-    const params = {
-      FunctionName: 'arn:aws:lambda:us-east-1:127550826632:function:test123get',
-      InvocationType: 'RequestResponse',
-      Payload: JSON.stringify(Payload)
-    };
+    return new Promise(((resolve, reject) => {
+        const params = {
+            FunctionName: 'arn:aws:lambda:us-east-1:127550826632:function:test123get',
+            InvocationType: 'RequestResponse',
+            Payload: JSON.stringify(Payload)
+        };
 
-    lambda.invoke(params, (err, data) => {
-      if (err) {
-        speakOutput = 'Sorry, something went wrong';
-        console.error(err);
-        reject(err);
-      }
-      else {
-        console.log('response data: ', data);
-        resolve(JSON.parse(data.Payload).body);
-      }
-    });
-  }));
+        lambda.invoke(params, (err, data) => {
+            if (err) {
+                speakOutput = 'Sorry, something went wrong';
+                console.error(err);
+                reject(err);
+            } else {
+                console.log('response data: ', data);
+                resolve(JSON.parse(data.Payload).body);
+            }
+        });
+    }));
 }
 
 const LaunchRequestHandler = {
@@ -35,7 +35,7 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Welcome to Smart Fridge! You can ask about a specific item, or simply say "What\'s in my fridge"';
+        const speakOutput = 'Welcome to your Smart Fridge! You can ask about a specific item, or simply say "What\'s in my fridge" to retrieve the contents of your fridge.';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -46,22 +46,34 @@ const LaunchRequestHandler = {
 
 const ListIntentHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ListIntent';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
+            Alexa.getIntentName(handlerInput.requestEnvelope) === 'ListIntent';
     },
     async handle(handlerInput) {
         
-        const items = await invokeLambda();
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        
 
+        const items = await invokeLambda();
+        i = 0;
         if (items && items.length) {
-          speakOutput = 'Your fridge contains ';
-          for (const item of items) {
-            speakOutput += item.Name + ', ';
-          }
-          speakOutput = speakOutput.slice(0, -2); //remove last 2 characers ', '
-        }
-        else {
-          speakOutput = 'There is nothing in your fridge';
+            speakOutput = 'Your fridge contains ';
+            for (const item of items) {
+                if (i < 9) {
+                    speakOutput += item.Name + ', ';
+                }
+                else {
+                    remainingFridgeContent += item.Name + ', ';
+                }
+                i++;
+            }
+            sessionAttributes.remainingFridgeContent = remainingFridgeContent;
+            handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+            remainingFridgeContent = '';
+            speakOutput += 'and more. Would you like me to continue?';
+
+        } else {
+            speakOutput = 'Sorry, I can\'t see anything in your fridge.';
         }
 
         return handlerInput.responseBuilder
@@ -71,21 +83,48 @@ const ListIntentHandler = {
     }
 };
 
+const YesIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
+            Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.YesIntent';
+    },
+    handle(handlerInput) {
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+
+        if (sessionAttributes.remainingFridgeContent) {
+            speakOutput = `Okay, your fridge also contains ${sessionAttributes.remainingFridgeContent}`;
+            speakOutput = speakOutput.slice(0, -2);
+            return handlerInput.responseBuilder
+              .speak(speakOutput)
+              .reprompt()
+              .getResponse();
+
+          } else {
+            const speakOutput = 'Sorry, I don\'t know about that. Please try again.';
+            return handlerInput.responseBuilder
+              .speak(speakOutput)
+              .reprompt()
+              .getResponse();
+          }
+    }
+};
+
 const ItemQueryIntentHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ItemQueryIntent';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
+            Alexa.getIntentName(handlerInput.requestEnvelope) === 'ItemQueryIntent';
     },
     async handle(handlerInput) {
-        
+
         const productName = handlerInput.requestEnvelope.request.intent.slots.ProductName.value;
-        const result = await invokeLambda({ProductName: productName});
+        const result = await invokeLambda({
+            ProductName: productName
+        });
 
         if (result.found) {
-          speakOutput = 'Your fridge contains ' + productName;
-        }
-        else {
-          speakOutput = 'I cannot find ' + productName + ' in your fridge';
+            speakOutput = 'Your fridge contains ' + productName;
+        } else {
+            speakOutput = 'I cannot find ' + productName + ' in your fridge';
         }
 
         return handlerInput.responseBuilder
@@ -97,12 +136,11 @@ const ItemQueryIntentHandler = {
 
 const HelpIntentHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
+            Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
         const speakOutput = 'You can ask about a specific item, or simply say "What\'s in my fridge"';
-
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -112,9 +150,9 @@ const HelpIntentHandler = {
 
 const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && (Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.CancelIntent'
-                || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
+            (Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.CancelIntent' ||
+                Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
         const speakOutput = 'Goodbye!';
@@ -124,6 +162,34 @@ const CancelAndStopIntentHandler = {
             .getResponse();
     }
 };
+
+const NoIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
+            (Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.NoIntent');
+    },
+    handle(handlerInput) {
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+
+        if (sessionAttributes.remainingFridgeContent) {
+            const speakOutput = 'You can ask about a specific item, or simply say "What\'s in my fridge" to retrieve the contents of your fridge';
+            remainingFridgeContent = '';
+            sessionAttributes.remainingFridgeContent = remainingFridgeContent;
+            return handlerInput.responseBuilder
+              .speak(speakOutput)
+              .reprompt()
+              .getResponse();
+        }
+        else {
+            const speakOutput = 'Sorry, I don\'t know about that. Please try again.';
+            return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt()
+            .getResponse();
+        }
+    }
+};
+
 /* *
  * FallbackIntent triggers when a customer says something that doesn’t map to any intents in your skill
  * It must also be defined in the language model (if the locale supports it)
@@ -131,8 +197,8 @@ const CancelAndStopIntentHandler = {
  * */
 const FallbackIntentHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.FallbackIntent';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
+            Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.FallbackIntent';
     },
     handle(handlerInput) {
         const speakOutput = 'Sorry, I don\'t know about that. Please try again.';
@@ -206,9 +272,11 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         ListIntentHandler,
+        YesIntentHandler,
         ItemQueryIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
+        NoIntentHandler,
         FallbackIntentHandler,
         SessionEndedRequestHandler,
         IntentReflectorHandler)
