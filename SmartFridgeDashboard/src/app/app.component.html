@@ -1,8 +1,11 @@
-<mat-toolbar color="primary"
-  ><button mat-icon-button [matMenuTriggerFor]="menu">
+<mat-toolbar color="primary">
+  <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
-  </button></mat-toolbar
->
+  </button>
+  <button mat-icon-button (click)="refresh()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</mat-toolbar>
 <mat-menu #menu="matMenu"> <amplify-sign-out></amplify-sign-out></mat-menu>
 <amplify-authenticator *ngIf="authState !== 'signedin'"
   ><amplify-sign-in slot="sign-in" hideSignUp></amplify-sign-in
@@ -11,10 +14,10 @@
 <div class="content" *ngIf="authState === 'signedin' && user">
   <h1>What's In My Fridge?</h1>
   <div class="sub-content">
+    <div class="image-wrapper">
     <amplify-s3-image
       img-key="FridgePicture.jpg"
-      (click)="expandPicture()"
-    ></amplify-s3-image>
+    ></amplify-s3-image></div>
     <sfd-grid-list></sfd-grid-list>
   </div>
 </div>

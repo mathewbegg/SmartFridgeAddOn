@@ -24,6 +24,7 @@
     "@angular/router": "~11.0.5",
     "@aws-amplify/ui-angular": "^0.4.20",
     "aws-amplify": "^3.3.17",
+    "fuse.js": "^6.4.6",
     "rxjs": "^6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

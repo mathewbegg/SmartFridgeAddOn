@@ -7,11 +7,16 @@ $breakpoint: 1199px;
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
+    padding: 0px 10px;
   }
 
   amplify-s3-image {
     --height: 80vh;
     cursor: pointer;
+  }
+
+  .image-wrapper {
+    min-width: 400px;
   }
 }
 
@@ -27,6 +32,15 @@ $breakpoint: 1199px;
     --height: 60vw;
     cursor: pointer;
   }
+
+  .image-wrapper {
+    min-height: 150px;
+  }
+}
+
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
 }
 
 h1 {

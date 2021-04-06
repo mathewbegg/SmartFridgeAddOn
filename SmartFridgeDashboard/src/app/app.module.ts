@@ -17,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { PicturePopUpComponent } from './picture-pop-up/picture-pop-up.component';
 import { GridListComponent } from './grid-list/grid-list.component';
@@ -60,7 +60,7 @@ https: Storage.configure({
     MatTableModule,
     MatInputModule,
     MatDialogModule,
-    MatGridListModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -49,4 +49,8 @@ export class AppComponent {
   expandPicture() {
     this.dialog.open(PicturePopUpComponent, null);
   }
+
+  refresh() {
+    window.location.reload();
+  }
 }

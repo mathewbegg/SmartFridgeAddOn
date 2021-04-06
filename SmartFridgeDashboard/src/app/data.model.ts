@@ -7,3 +7,8 @@ export interface FridgeItem {
   Confidence: number;
   color?: string;
 }
+
+export interface FridgeItemSortOption {
+  display: string;
+  sortFunction: (a: FridgeItem, b: FridgeItem) => 1 | -1 | 0;
+}

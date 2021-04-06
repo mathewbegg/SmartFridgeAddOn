@@ -1,14 +1,33 @@
+<div class="filter-header">
+<button class="filter-menu" mat-icon-button [matMenuTriggerFor]="filterMenu">
+  <mat-icon>filter_list</mat-icon>
+</button>
+<mat-menu #filterMenu="matMenu" xPosition="before">
+  <div class="menu-title">Sort By</div>
+  <button *ngFor="let option of sortOptions" mat-menu-item (click)="changeSortFunction(option)" class="sort-option" [class.selected-option]="currentSortOption === option">
+    {{option.display}}
+  </button>
+  <div class="confidence-toggle">
+    <span>Show Confidence</span>
+    <mat-slide-toggle [(ngModel)]="showConfidence" color="primary" (click)="$event.stopPropagation();"></mat-slide-toggle>
+  </div>
+</mat-menu>
 <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input
-      matInput
-      (keyup)="applyFilter()"
-      [(ngModel)]="filterString"
-      placeholder="Ex. Apple"
-    />
-  </mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input
+    matInput
+    (keyup)="applyFilter()"
+    [(ngModel)]="filterString"
+    placeholder="Ex. Apple"
+  />
+  <button mat-button *ngIf="filterString" matSuffix aria-label="Clear" (click)="filterString=''">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+</div>
 <div class="grid-container">
     <div class="sfd-tile" *ngFor="let item of displayItems" [style.background-color]="getShade(item.Confidence)">
-        <div>{{item.Name}}</div>
+        <div class="item-name">{{item.Name}}</div>
+        <div class="item-confidence" *ngIf="showConfidence">{{item.Confidence | percent}}</div>
     </div>
 </div>
