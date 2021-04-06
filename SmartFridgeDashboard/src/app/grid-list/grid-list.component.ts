@@ -66,6 +66,11 @@ export class GridListComponent implements OnInit {
     this.displayItems.sort(this.currentSortOption.sortFunction);
   }
 
+  clearFilter() {
+    this.filterString = '';
+    this.applyFilter();
+  }
+
   getShade(confidence: number) {
     const floor = 0.25;
     const alpha = floor + (1 - floor) * confidence;

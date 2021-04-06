@@ -20,7 +20,7 @@
     [(ngModel)]="filterString"
     placeholder="Ex. Apple"
   />
-  <button mat-button *ngIf="filterString" matSuffix aria-label="Clear" (click)="filterString=''">
+  <button mat-button *ngIf="filterString" matSuffix aria-label="Clear" (click)="clearFilter()">
     <mat-icon>close</mat-icon>
   </button>
 </mat-form-field>
