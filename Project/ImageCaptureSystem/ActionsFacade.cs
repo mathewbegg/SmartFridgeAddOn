@@ -4,7 +4,7 @@ using OpenCvSharp;
 
 namespace ImageCaptureSystem
 {
-    public class ImageSender
+    public class ActionsFacade
     {
 
         public static async Task<Mat> CaptureImage()

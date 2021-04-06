@@ -25,10 +25,9 @@ namespace GUI
         private async void CaptureImageButton_Click(object sender, RoutedEventArgs e)
         {
 
-            Success.Visibility = Visibility.Hidden;                                                     // Changing supplementary text visibility
-            Failure.Visibility = Visibility.Hidden;                                                     // Changing supplementary text visibility
+            HideStatusText();
 
-            var image = await ImageSender.CaptureImage();                                           // Capturing image, return image matrix
+            var image = await ActionsFacade.CaptureImage();                                           // Capturing image, return image matrix
 
             if (DisplayImage(image) == 0)                                                              // Displaying image to main window of application
                 Success.Visibility = Visibility.Visible;                                               // Changing supplementary text visibility
@@ -40,21 +39,27 @@ namespace GUI
 
         private async void UploadImageButton_Click(object sender, RoutedEventArgs e)
         {
-            Success.Visibility = Visibility.Hidden;                                                    // Changing supplementary text visibility
-            Failure.Visibility = Visibility.Hidden;                                                    // Changing supplementary text visibility
+            HideStatusText();
 
-            OpenFileDialog openFile = new OpenFileDialog { Filter = "Image files (*.jpg) | *.jpg" };   // Windows 10 Open File functionality
+            OpenFileDialog openFile = new OpenFileDialog { Filter = "Image files (*.bmp;*.jpg;*.jpeg*.png)|*.BMP;*.JPG;*.JPEG;*.PNG" };   // Windows 10 Open File functionality
 
             if (openFile.ShowDialog() == true)                // If user chooses a file
                 File.Copy(openFile.FileName, FilePath, true);             // Copy file contents from location to project destination
 
-            if (await ImageSender.UploadImage() == 0)         
+            DisplayImage(openFile);                                                                    // Displaying image to main window of application
+
+            if (await ActionsFacade.UploadImage() == 0)         
                 Success.Visibility = Visibility.Visible;                                               // Changing supplementary text visibility
             else
                 Failure.Visibility = Visibility.Visible;                                               // Changing supplementary text visibility
 
-            DisplayImage(openFile);                                                                    // Displaying image to main window of application
 
+        }
+
+        private void HideStatusText()
+        {
+            Success.Visibility = Visibility.Hidden; // Changing supplementary text visibility
+            Failure.Visibility = Visibility.Hidden; // Changing supplementary text visibility
         }
 
         private int DisplayImage(Mat image)
